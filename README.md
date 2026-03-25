@@ -135,15 +135,15 @@ After this completes, we can inspect the DEF file that was generated:
 
 ```bash
 cd results/floorplan/
-less picorv32a.floorplan.def
+less picorv32a.def
 ```
 
 #### Viewing the Floorplan in Magic
 
 ```bash
-magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech \
-      lef read ../../tmp/merged.lef \
-      def read picorv32a.floorplan.def &
+magic -T /home/vsduser/Desktop/OpenLane/designs/picorv32a/sky130A/libs.tech/magic/sky130A.tech \
+      lef read ../../tmp/merged.nom.lef \
+      def read picorv32a.def &
 ```
 ![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/06_floorplan1.png)
 
@@ -325,10 +325,10 @@ CTS builds a balanced tree of clock buffers to distribute the clock signal acros
 ### Lab — Custom Cell Integration and STA with OpenSTA
 Screenshot of tracks.info of sky130_fd_sc_hd
 ![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/55_day4.1.png)
-# Get syntax for grid command
+#### Get syntax for grid command
 help grid
 
-# Set grid values accordingly
+#### Set grid values accordingly
 grid 0.46um 0.34um 0.23um 0.17um
 ![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/57_day4.4.png)
 ![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/56_day4.2.png)
@@ -365,7 +365,7 @@ Screenshot of placement def in magic
 ![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/69_day4.17.png)
 Screenshot of custom inverter inserted in placement def with proper abutment
 ![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/70_day4.18.png)
-# Command to view internal connectivity layers
+#### Command to view internal connectivity layers
 expand
 ![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/71_day4.19.png)
 
@@ -390,47 +390,36 @@ run_cts
 ![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/78_cts1.png)
 ![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/79_cts2.png)
 
-# Command to run OpenROAD tool
+#### Command to run OpenROAD tool
 openroad
-
-# Reading lef file
-read_lef /openLANE_flow/designs/picorv32a/runs/24-03_10-03/tmp/merged.lef
-
-# Reading def file
-read_def /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/cts/picorv32a.cts.def
-
-# Creating an OpenROAD database to work with
+Reading lef file:
+read_lef /OpenLane/designs/picorv32a/runs/24-03_10-03/tmp/merged.nom.lef
+Reading def file:
+read_def /OpenLane/designs/picorv32a/runs/24-03_10-03/results/cts/picorv32a.def
+Creating an OpenROAD database to work with:
 write_db pico_cts.db
-
-# Loading the created database in OpenROAD
+Loading the created database in OpenROAD:
 read_db pico_cts.db
-
-# Read netlist post CTS
-read_verilog /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/synthesis/picorv32a.synthesis_cts.v
-
-# Read library for design
+Read netlist post CTS:
+read_verilog /OpenLane/designs/picorv32a/runs/24-03_10-03/results/synthesis/picorv32a.v
+Read library for design:
 read_liberty $::env(LIB_SYNTH_COMPLETE)
-
-# Link design and library
+Link design and library:
 link_design picorv32a
-
-# Read in the custom sdc we created
-read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
-
-# Setting all cloks as propagated clocks
+Read in the custom sdc we created:
+read_sdc /OpenLane/designs/picorv32a/src/my_base.sdc
+Setting all cloks as propagated clocks:
 set_propagated_clock [all_clocks]
-
-# Check syntax of 'report_checks' command
+Check syntax of 'report_checks' command:
 help report_checks
-
-# Generating custom timing report
+Generating custom timing report:
 report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
 
 ![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/80_cts4.png)
 ![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/81_cts5.png)
 ![image alt](https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/2983478f1676f67bec4ff6805d9409ff08dd0498/images/82_cts6.png)
 
-# Exit to OpenLANE flow
+Exit to OpenLANE flow
 exit
 ---
 
