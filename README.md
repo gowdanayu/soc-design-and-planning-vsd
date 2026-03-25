@@ -448,7 +448,7 @@ Routing happens in two stages:
 After routing, parasitics (resistance and capacitance of actual wires) are extracted into a **SPEF (Standard Parasitic Exchange Format)** file. These parasitics are then back-annotated into the netlist and STA is re-run for final sign-off timing.
 
 
-### Lab — Power Distribution, Routing, and GDSII Generation
+### Lab — Power Distribution, Routing
 
 #### Generating Power Distribution Network
 
