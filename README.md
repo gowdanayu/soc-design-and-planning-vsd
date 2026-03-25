@@ -476,17 +476,6 @@ Common violations to look out for:
 
 -----
 
-
-### Generating GDSII
-
-tcl
-run_magic
-
-
-This invokes Magic to stream out the final *GDSII file* — the actual data sent to the foundry for fabrication. You can also generate the *LEF* for the full chip and run a final *LVS* (Layout vs Schematic) check with Netgen to verify that what was routed matches the synthesized netlist.
-
------
-
 ## Tools & Environment
 
 | Tool | Purpose |
