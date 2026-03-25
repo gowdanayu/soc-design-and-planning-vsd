@@ -392,26 +392,37 @@ run_cts
 
 #### Command to run OpenROAD tool
 openroad
+
 Reading lef file:
 read_lef /OpenLane/designs/picorv32a/runs/24-03_10-03/tmp/merged.nom.lef
+
 Reading def file:
 read_def /OpenLane/designs/picorv32a/runs/24-03_10-03/results/cts/picorv32a.def
+
 Creating an OpenROAD database to work with:
 write_db pico_cts.db
+
 Loading the created database in OpenROAD:
 read_db pico_cts.db
+
 Read netlist post CTS:
 read_verilog /OpenLane/designs/picorv32a/runs/24-03_10-03/results/synthesis/picorv32a.v
+
 Read library for design:
 read_liberty $::env(LIB_SYNTH_COMPLETE)
+
 Link design and library:
 link_design picorv32a
+
 Read in the custom sdc we created:
 read_sdc /OpenLane/designs/picorv32a/src/my_base.sdc
+
 Setting all cloks as propagated clocks:
 set_propagated_clock [all_clocks]
+
 Check syntax of 'report_checks' command:
 help report_checks
+
 Generating custom timing report:
 report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
 
