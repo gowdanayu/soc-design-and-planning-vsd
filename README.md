@@ -70,7 +70,7 @@ make mount
 package require openlane 1.0.2
 ```
 
-<!-- SCREENSHOT: Add terminal showing OpenLANE launch and interactive mode here -->
+<!-- SCREENSHOT: https://github.com/gowdanayu/soc-design-and-planning-vsd/blob/f83c45ec488f339de18b7ae7c4b3e916195f4a10/images/01_syn.png-->
 
 #### Preparing the Design
 
